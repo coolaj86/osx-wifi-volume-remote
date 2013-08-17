@@ -3,23 +3,59 @@ window.jQuery(function () {
 
   var $ = window.jQuery
     , events = $('body')
+    , volume
     ;
 
   events.on('change', '.js-volume', function (ev) {
+    ev.preventDefault();
+    ev.stopPropagation();
+
     var val = $(this).val()
+      ;
+
+    $('.js-volume').val(val);
+
+    // debounce
+    if (this.sliderTimeour) clearTimeout(this.sliderTimeour);
+    this.sliderTimeour = setTimeout(function(){
+      $.get('/controls/volume/' + val, function (data) {
+        volume = data.volume;
+        $('.js-volume').val(data.volume);
+      });
+    }, 500);
+  });
+
+  events.on('click', '.js-volume-up', function (ev) {
+    var val = volume + 1
       ;
 
     ev.preventDefault();
     ev.stopPropagation();
 
+    $('.js-volume').val(val);
+
     $.get('/controls/volume/' + val, function (data) {
+      volume = data.volume;
+      $('.js-volume').val(data.volume);
+    });
+  });
+
+  events.on('click', '.js-volume-down', function (ev) {
+    var val = volume - 1
+      ;
+
+    ev.preventDefault();
+    ev.stopPropagation();
+
+    $('.js-volume').val(val);
+
+    $.get('/controls/volume/' + val, function (data) {
+      volume = data.volume;
       $('.js-volume').val(data.volume);
     });
   });
 
   events.on('click', '.js-mute', function (ev) {
-    console.log('turbo tastic');
-
     ev.preventDefault();
     ev.stopPropagation();
 
@@ -38,6 +74,7 @@ window.jQuery(function () {
       $('.js-unmute').hide();
     });
   });
+
   events.on('click', '.js-quickset', function (ev) {
     var val = $(this).text()
       , now = Date.now()
@@ -48,20 +85,33 @@ window.jQuery(function () {
 
     $.get('/controls/volume/' + val, function (data) {
       console.log('Changed volume in ' + (Date.now() - now) + 'ms');
+      volume = data.volume;
       $('.js-volume').val(data.volume);
     });
   });
 
-  // Initialize
-  $.get('/controls/volume', function (data) {
-    $('.js-volume').val(data.volume);
+  events.on('click', '.js-refresh', function (ev) {
+    ev.preventDefault();
+    ev.stopPropagation();
 
-    if (data.muted) {
-      $('.js-mute').hide();
-      $('.js-unmute').show();
-    } else {
-      $('.js-unmute').hide();
-      $('.js-mute').show();
-    }
+    getVolume();
   });
+
+  // Initialize
+  function getVolume() {
+    $.get('/controls/volume', function (data) {
+      volume = data.volume;
+      $('.js-volume').val(data.volume);
+
+      if (data.muted) {
+        $('.js-mute').hide();
+        $('.js-unmute').show();
+      } else {
+        $('.js-unmute').hide();
+        $('.js-mute').show();
+      }
+    });
+  }
+  getVolume();
+  setInterval(getVolume, 10 * 1000);
 });

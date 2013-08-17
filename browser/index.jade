@@ -11,22 +11,37 @@ html
     script(src="/app.js")
   body
     .container
-      header.header
-        p.lead OS X Wifi Volume Remote
-      div
-        input.js-volume(type="text")
-      div
-        input.js-volume(type="range", min="-1", max="100", step="1")
-      div
-        button.btn.btn-default.js-quickset 10
-        button.btn.btn-default.js-quickset 25
-        button.btn.btn-default.js-quickset 33
-        button.btn.btn-default.js-quickset 50
-      div
-        button.btn.btn-default.js-quickset 66
-        button.btn.btn-default.js-quickset 75
-        button.btn.btn-default.js-quickset 90
-        button.btn.btn-default.js-quickset 100
-      div
-        button.btn.btn-danger.js-mute Mute
-        button.btn.btn-success.js-unmute Unmute
+      header.header.row
+        h4.col-xs-12.lead.text-center OS X Wifi Volume Remote Control
+      .row
+        .col-xs-2
+        input.col-xs-6.input-lg.js-volume(type="text")
+        button.col-xs-2.btn.btn-lg.btn-info.js-refresh ↺
+        .col-xs-2
+      .row
+        .col-xs-12 &nbsp;
+      .row
+        button.btn.btn-default.col-xs-2.js-volume-down &lt;
+        input.col-xs-8.js-volume(type="range", min="-1", max="100", step="1")
+        button.btn.btn-default.col-xs-2.js-volume-up &gt;
+      .row
+        .col-xs-12 &nbsp;
+      .row
+        button.col-xs-3.btn.btn-lg.btn-default.js-quickset 10
+        button.col-xs-3.btn.btn-lg.btn-default.js-quickset 25
+        button.col-xs-3.btn.btn-lg.btn-default.js-quickset 33
+        button.col-xs-3.btn.btn-lg.btn-default.js-quickset 50
+      .row
+        .col-xs-12 &nbsp;
+      .row
+        button.col-xs-3.btn.btn-lg.btn-default.js-quickset 66
+        button.col-xs-3.btn.btn-lg.btn-default.js-quickset 75
+        button.col-xs-3.btn.btn-lg.btn-default.js-quickset 90
+        button.col-xs-3.btn.btn-lg.btn-default.js-quickset 100
+      .row
+        .col-xs-12 &nbsp;
+      .row
+        .col-xs-3
+        button.col-xs-6.btn.btn-lg.btn-danger.js-mute Mute
+        button.col-xs-6.btn.btn-lg.btn-success.js-unmute Unmute
+        .col-xs-3
