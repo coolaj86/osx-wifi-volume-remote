@@ -10,14 +10,19 @@ Installation & Usage
 
 1. Get [Node.js](http://nodejs.org#download)
 
-2. Get this code and start the server
+2. Open **Terminal**
+
+3. Install `osx-wifi-volume-remote` like so
 
         npm install -g osx-wifi-volume-remote
+
+4. Start the server like so (and note that it shows the name of your computer)
+        
         osx-wifi-volume-server 4040
 
 3. Type the `http://<your-computer-name>.local:4040/` whatever onto your phone's browser
 
-4. Control your MacBook's volume over wifi!
+4. Enjoy controlling your MacBook's volume over wifi!
 
 API Example
 ===
