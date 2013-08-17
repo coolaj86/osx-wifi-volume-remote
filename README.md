@@ -3,6 +3,8 @@ OS X WiFi Volume Remote
 
 A web-based html5 / node.js app to control OS X system volume from iPhone, Android, etc
 
+![screenshot](http://i.imgur.com/28tat15l.png "beautifully ugly")
+
 Installation & Usage
 ===
 
