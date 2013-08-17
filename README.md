@@ -46,11 +46,12 @@ API Example
 API
 ===
 
-  * `get(cb)`
-  * `fade(cb, level, duration)`
-  * `mute(cb, duration)`
-  * `unmute(cb, duration)`
-  * `set(cb, level)`
+  * `get(cb)` read the current volume level and mute status
+  * `fade(cb, level, duration)` specify a volume level to fade to
+  * `fadeBy(cb, difference, duration)` specify a positive or negative difference in volume to fade to
+  * `mute(cb, duration)` fades to 0, mutes, then restores volume while muted
+  * `unmute(cb, duration)` sets volume to 0, unmutes, then fades back in to volume level
+  * `set(cb, level)` hard set a volume without fading
   * all callbacks have the arguments `err, volume, muted`
 
 NOTE: The callbacks all must come first (it was just easier to write the code that way).
@@ -58,7 +59,7 @@ NOTE: The callbacks all must come first (it was just easier to write the code th
 Development
 ===
 
-If you want to develop, here's the clone and build process
+If you want to develop, here's the clone and build process:
 
     git clone https://github.com/coolaj86/osx-wifi-volume-remote.git
     pushd osx-wifi-volume-remote
