@@ -61,11 +61,59 @@ Development
 
 If you want to develop, here's the clone and build process:
 
-    git clone https://github.com/coolaj86/osx-wifi-volume-remote.git
-    pushd osx-wifi-volume-remote
+```bash
+git clone https://github.com/coolaj86/osx-wifi-volume-remote.git
+pushd osx-wifi-volume-remote
 
-    npm install -g jade
-    jade browser/index.jade; mv browser/index.html public/
+npm install -g jade
+jade browser/index.jade; mv browser/index.html public/
 
-    npm install
-    node app 4040
+npm install
+node app 4040
+```
+    
+AppleScript
+---
+
+I had to learn a bit of AppleScript to get this all together.
+I'll give the gist of it below an you can also
+[read the article](http://blog.coolaj86.com/articles/how-to-control-os-x-system-volume-with-applescript/)
+on my blog.
+
+```bash
+# Check volume level and mute status
+osascript -e "output volume of (get volume settings) & output muted of (get volume settings)"
+
+# Mute
+osascript -e "set volume with output muted"
+
+# Unmute
+osascript -e "set volume without output muted"
+
+# Mute status
+osascript -e "output muted of (get volume settings)"
+
+# Set volume by 100ths
+osascript -e "set volume output volume 51 --100%"
+
+# Set to 0% without muting (the secret lowest possible setting)
+osascript -e "set volume without output muted output volume 0 --100%"
+
+# Set to non-0 without unmuting
+osascript -e "set volume with output muted output volume 42 --100%"
+
+# Decrement the current volume by 1
+osascript -e "set volume output volume (output volume of (get volume settings) - 1) --100%"
+```
+
+It turns out that AppleScript takes about 80ms to start up and run,
+so for the fade I actually create a file with the whole loop unrolled
+and it looks like this:
+
+```applescript
+set volume without output muted output volume 18 --100%
+delay 0.033
+set volume without output muted output volume 17 --100%
+delay 0.033
+set volume without output muted output volume 16 --100%
+```
