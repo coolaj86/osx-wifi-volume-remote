@@ -22,7 +22,7 @@ Installation & Usage
 API Example
 ===
 
-      var aplvol = require('osx-wifi-volume-control')
+      var aplvol = require('osx-wifi-volume-remote')
         ;
 
       // All callbacks have the same arguments
