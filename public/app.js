@@ -26,7 +26,7 @@ window.jQuery(function () {
   });
 
   events.on('click', '.js-volume-up', function (ev) {
-    var val = volume + 1
+    var val = volume + 2
       ;
 
     ev.preventDefault();
@@ -41,7 +41,7 @@ window.jQuery(function () {
   });
 
   events.on('click', '.js-volume-down', function (ev) {
-    var val = volume - 1
+    var val = volume - 2
       ;
 
     ev.preventDefault();
