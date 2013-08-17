@@ -1,7 +1,7 @@
 (function () {
   'use strict';
 
-  var wivol = require('./wivol')
+  var wivol = require('../lib/osascript-vol-ctrl')
     , fade = wivol.fade
     ;
 

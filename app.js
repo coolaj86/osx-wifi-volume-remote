@@ -4,7 +4,7 @@
   var connect = require('express')
     , path = require('path')
     , app = connect()
-    , wivol = require('./wivol')
+    , wivol = require('./lib/osascript-vol-ctrl')
     , exec = require('child_process').exec
     ;
 

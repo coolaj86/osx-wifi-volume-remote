@@ -1,7 +1,7 @@
 (function () {
   'use strict';
 
-  var unroll = require('./stepper').unroll
+  var unroll = require('../lib/stepper').unroll
     , steps
     ;
 
