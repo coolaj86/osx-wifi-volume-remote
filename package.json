@@ -11,7 +11,7 @@
   },
   "devDependencies": {},
   "bin": {
-    "osx-wifi-volume-server": "app"
+    "osx-wifi-volume-server": "app.js"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
