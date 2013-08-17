@@ -12,7 +12,7 @@ Installation & Usage
 
 2. Get this code and start the server
 
-        npm install osx-wifi-volume-remote
+        npm install -g osx-wifi-volume-remote
         osx-wifi-volume-server 4040
 
 3. Type the `http://<your-computer-name>.local:4040/` whatever onto your phone's browser
