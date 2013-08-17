@@ -65,7 +65,7 @@
 
   if (require.main === module) {
     exec('hostname', function (err, stdout) {
-      require('http').createServer(app).listen(process.argv[2], function () {
+      require('http').createServer(app).listen(process.argv[2] || 4040, function () {
         console.log('Visit on your phone at ');
         console.log('http://' + stdout.trim() + ':' + this.address().port + '/');
       });

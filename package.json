@@ -1,0 +1,34 @@
+{
+  "name": "osx-wifi-volume-remote",
+  "version": "1.0.0",
+  "description": "A web-based html5 / node.js app to control OS X system volume from iPhone, Android, etc",
+  "main": "lib/osascript-vol-ctrl",
+  "directories": {
+    "test": "test"
+  },
+  "dependencies": {
+    "express": "~3.3.5"
+  },
+  "devDependencies": {},
+  "bin": {
+    "osx-wifi-volume-server": "app"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/coolaj86/osx-wifi-volume-remote.git"
+  },
+  "keywords": [
+    "volume",
+    "osx",
+    "mac",
+    "remote"
+  ],
+  "author": "AJ ONeal <coolaj86@gmail.com> (http://coolaj86.com)",
+  "license": "Apache2",
+  "bugs": {
+    "url": "https://github.com/coolaj86/osx-wifi-volume-remote/issues"
+  }
+}
