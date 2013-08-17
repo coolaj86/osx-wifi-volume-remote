@@ -113,8 +113,8 @@
       steps.push({
         val: finalVal
       , time: finalTime
-      //, step: step
-      //, interval: interval
+      , step: step || MIN_STEP
+      , interval: interval || MIN_TIMEOUT
       });
     }
 

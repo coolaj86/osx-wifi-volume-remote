@@ -1,8 +1,14 @@
 (function () {
   'use strict';
 
+  // TODO use spawn instead of exec so that we can KILL it sometimes when we want to!
   var exec = require('child_process').exec
+    , os = require('os')
+    , fs = require('fs')
+    , path = require('path')
     , unroll = require('./stepper').unroll
+    , tmpdir = os.tmpdir()
+    , filepath = path.join(tmpdir, 'osx-wifi-volume-remote.tmp.applescript')
     , MIN_VAL = -1
     , MAX_VAL = 100
     , MIN_STEP = 1
@@ -11,6 +17,8 @@
     , timeouts = []
     , callbacks = {}
     ;
+
+  console.log(filepath);
 
   function mute(cb, time) {
     // get the current volume level
@@ -142,6 +150,32 @@
     timeouts.push(timeout);
   }
 
+  function changeViaScript(steps, callback) {
+    var script = []
+      ;
+
+    steps.forEach(function (step) {
+      script.push('delay ' + (step.interval / 1000));
+      script.push('set volume without output muted output volume ' + step.val + ' --100%');
+    });
+
+    fs.writeFileSync(filepath, script.join('\n'), 'utf8');
+    exec('osascript ' + filepath, function () {
+      callback();
+    });
+  }
+  function changeViaExec(steps, callback) {
+    steps.forEach(function (step, i) {
+      pushTimeout(function () {
+        if (i === steps.length - 1) {
+          setRaw(callback, step.val);
+        } else {
+          setRaw(function () { }, step.val);
+        }
+      }, step.time);
+    });
+  }
+
   // This should be done from the perspective
   // that at time x the volume should be at y%
   function fade(cb, level, time) {
@@ -156,6 +190,7 @@
       var steps
         , delta
         , callback = get.bind(null, cb)
+        , script = []
         ;
 
       if ('number' === typeof _delta) {
@@ -174,15 +209,9 @@
       if (!steps.length) {
         callback();
       }
-      steps.forEach(function (step, i) {
-        pushTimeout(function () {
-          if (i === steps.length - 1) {
-            setRaw(callback, step.val);
-          } else {
-            setRaw(function () { }, step.val);
-          }
-        }, step.time);
-      });
+
+      //changeViaExec(steps, callback);
+      changeViaScript(steps, callback);
     });
   }
 

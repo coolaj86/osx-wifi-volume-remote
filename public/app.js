@@ -40,12 +40,14 @@ window.jQuery(function () {
   });
   events.on('click', '.js-quickset', function (ev) {
     var val = $(this).text()
+      , now = Date.now()
       ;
 
     ev.preventDefault();
     ev.stopPropagation();
 
     $.get('/controls/volume/' + val, function (data) {
+      console.log('Changed volume in ' + (Date.now() - now) + 'ms');
       $('.js-volume').val(data.volume);
     });
   });
