@@ -22,11 +22,14 @@ Installation & Usage
 API Example
 ===
 
-      var aplvol = require('osx-wifi-volume-remote')
+`npm install osx-wifi-volume-remote`
+
+
+      var applvol = require('osx-wifi-volume-remote')
         ;
 
       // All callbacks have the same arguments
-      aplvol.get(function (err, volume, muted) {
+      applvol.get(function (err, volume, muted) {
         console.log('Volume is set to ' + volume + '% and is ' + (muted ? '' : 'not ') + 'muted');
       });
 
