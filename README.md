@@ -21,6 +21,7 @@ Installation & Usage
         osx-wifi-volume-server 4040
 
 3. Type the `http://<your-computer-name>.local:4040/` whatever onto your phone's browser
+    (**NOTE**: Your phone or whatever device must be on the same WiFi or ethernet network as your computer)
 
 4. Enjoy controlling your MacBook's volume over wifi!
 
