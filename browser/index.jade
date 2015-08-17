@@ -1,51 +1,16 @@
 doctype html
 html
   head
-    title OSX Vol Ctrl
+    title Mac Volume
     meta(name="apple-mobile-web-app-capable", content="yes")
     meta(name="apple-mobile-web-app-status-bar-style", content="black-translucent")
-    meta(name="viewport", content="width=device-width, initial-scale=1.0")
-    //-- user-scalable=no
+    meta(name="viewport", content="width=device-width, initial-scale=1.0, user-scalable=no")
     link(rel="apple-touch-icon", sizes="144x144", href="apple-touch-icon-144.png")
     script(src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js")
-    // Latest compiled and minified CSS
-    link(rel="stylesheet", href="//netdna.bootstrapcdn.com/bootstrap/3.0.0-wip/css/bootstrap.min.css")
-    // Latest compiled and minified JavaScript
-    script(src="//netdna.bootstrapcdn.com/bootstrap/3.0.0-wip/js/bootstrap.min.js")
-    script(src="/app.js")
+
+    link(rel="stylesheet", href="style.css")
+    script(src="app.js")
+
   body
-    .container
-      header.header.row
-        h4.col-xs-12.lead.text-center OS X Wifi Volume Remote Control
-      .row
-        .col-xs-2
-        input.col-xs-6.input-lg.js-volume(type="text")
-        button.col-xs-2.btn.btn-lg.btn-info.js-refresh ↺
-        .col-xs-2
-      .row
-        .col-xs-12 &nbsp;
-      .row
-        button.btn.btn-default.col-xs-2.js-volume-down &lt;
-        input.col-xs-8.js-volume(type="range", min="-1", max="100", step="1")
-        button.btn.btn-default.col-xs-2.js-volume-up &gt;
-      .row
-        .col-xs-12 &nbsp;
-      .row
-        button.col-xs-3.btn.btn-lg.btn-default.js-quickset 10
-        button.col-xs-3.btn.btn-lg.btn-default.js-quickset 25
-        button.col-xs-3.btn.btn-lg.btn-default.js-quickset 33
-        button.col-xs-3.btn.btn-lg.btn-default.js-quickset 50
-      .row
-        .col-xs-12 &nbsp;
-      .row
-        button.col-xs-3.btn.btn-lg.btn-default.js-quickset 66
-        button.col-xs-3.btn.btn-lg.btn-default.js-quickset 75
-        button.col-xs-3.btn.btn-lg.btn-default.js-quickset 90
-        button.col-xs-3.btn.btn-lg.btn-default.js-quickset 100
-      .row
-        .col-xs-12 &nbsp;
-      .row
-        .col-xs-3
-        button.col-xs-6.btn.btn-lg.btn-danger.js-mute Mute
-        button.col-xs-6.btn.btn-lg.btn-success.js-unmute Unmute
-        .col-xs-3
+    input.js-real-volume(type="range", min="0", max="1", step="0.01")
+    input.js-set-volume(type="range", min="0", max="1", step="0.01")

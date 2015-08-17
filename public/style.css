@@ -1,0 +1,62 @@
+html {
+  height: 100%;
+  background: linear-gradient(#ffffff, #dbdddc);
+}
+
+[class*='-ms-']:before {
+  opacity: .15;
+}
+
+[type='range'] {
+  box-sizing: border-box;
+  overflow: visible;
+  position: absolute;
+  -webkit-appearance: none;
+  top: 50%;
+  left: 50%;
+  border: solid 1em transparent;
+  width: 85vh;
+  height: 100vw;
+  padding: 0 .5em;
+  -webkit-transform: translate(-50%, -50%) rotate(-90deg);
+  background: linear-gradient(90deg, #afafaf 2px, rgba(0, 0, 0, 0) 2px), linear-gradient(90deg, #afafaf 2px, rgba(0, 0, 0, 0) 2px), linear-gradient(90deg, #ffffff 2px, rgba(0, 0, 0, 0) 2px), linear-gradient(90deg, #ffffff 2px, rgba(0, 0, 0, 0) 2px);
+  background-clip: padding-box;
+  background-position: calc(.75em - 1px) 0, calc(.75em - 1px) calc(100% - 1px), calc(.75em - 1px) 1px, calc(.75em - 1px) 100%;
+  background-repeat: repeat-x;
+  background-size: 1em 1em;
+  /* Firefox & Chrome/ Opera need this,
+     otherwise font-size is smaller */
+  font-size: 1em;
+  cursor: pointer;
+  /* wish I could style this asshole */
+}
+[type='range']::-webkit-slider-runnable-track {
+  -webkit-appearance: none;
+  border: none;
+  /* because IE */
+  height: 0;
+}
+[type='range']::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  margin-top: -50vw;
+  border: none;
+  width: 100px;
+  height: 100vw;
+  border-radius: .25em;
+  box-shadow: 0 -1px #fefefe, 0 0 0.125em #d0d0d0, 0 0.875em 0.25em -0.75em #4e4e4e, 0 1em 0.5em -0.75em #4e4e4e, 0 0.125em 0.25em #808080, 0 0.25em 0.5em #808080, inset 0 0.25em 0.25em rgba(204, 204, 204, 0.5), inset 0 0.5em 0.5em rgba(221, 221, 221, 0.5);
+  background: linear-gradient(90deg, rgba(201, 201, 201, 0) 15%, #c9c9c9 37.5%, #f4f4f4 37.5%, #f4f4f4 62.5%, #c9c9c9 62.5%, rgba(201, 201, 201, 0) 85%) #fefefe;
+  opacity: 0.8;
+}
+
+.js-real-volume {
+  background: none;
+}
+.js-real-volume::-webkit-slider-thumb {
+  background: white;
+  box-shadow: none;
+  opacity: 0.8;
+}
+.js-set-volume::-webkit-slider-runnable-track {
+  background: none;
+  box-shadow: none;
+}
