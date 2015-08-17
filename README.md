@@ -67,7 +67,7 @@ git clone https://github.com/coolaj86/osx-wifi-volume-remote.git
 pushd osx-wifi-volume-remote
 
 npm install -g jade
-jade browser/index.jade; mv browser/index.html public/
+jade < browser/index.jade > public/index.html
 
 npm install
 node app 4040
