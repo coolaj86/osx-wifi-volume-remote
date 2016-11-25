@@ -1,117 +1,60 @@
-window.jQuery(function () {
-  'use strict';
+function throttle (callback, limit) {
+  var wait = false;
+  return function () {
+    if (!wait) {
+      callback.apply(null, arguments);
+      wait = true;
+      setTimeout(function () {
+        wait = false;
+      }, limit);
+    }
+  };
+}
 
-  var $ = window.jQuery
-    , events = $('body')
-    , volume
-    ;
 
-  events.on('change', '.js-volume', function (ev) {
-    ev.preventDefault();
-    ev.stopPropagation();
-
-    var val = $(this).val()
-      ;
-
-    $('.js-volume').val(val);
-
-    // debounce
-    if (this.sliderTimeour) clearTimeout(this.sliderTimeour);
-    this.sliderTimeour = setTimeout(function(){
-      $.get('/controls/volume/' + val, function (data) {
-        volume = data.volume;
-        $('.js-volume').val(data.volume);
-      });
-    }, 500);
-  });
-
-  events.on('click', '.js-volume-up', function (ev) {
-    var val = volume + 2
-      ;
-
-    ev.preventDefault();
-    ev.stopPropagation();
-
-    $('.js-volume').val(val);
-
-    $.get('/controls/volume/' + val, function (data) {
-      volume = data.volume;
-      $('.js-volume').val(data.volume);
-    });
-  });
-
-  events.on('click', '.js-volume-down', function (ev) {
-    var val = volume - 2
-      ;
-
-    ev.preventDefault();
-    ev.stopPropagation();
-
-    $('.js-volume').val(val);
-
-    $.get('/controls/volume/' + val, function (data) {
-      volume = data.volume;
-      $('.js-volume').val(data.volume);
-    });
-  });
-
-  events.on('click', '.js-mute', function (ev) {
-    ev.preventDefault();
-    ev.stopPropagation();
-
-    $.get('/controls/mute/', function () {
-      $('.js-mute').hide();
-      $('.js-unmute').show();
-    });
-  });
-  events.on('click', '.js-unmute', function (ev) {
-
-    ev.preventDefault();
-    ev.stopPropagation();
-
-    $.get('/controls/unmute', function () {
-      $('.js-mute').show();
-      $('.js-unmute').hide();
-    });
-  });
-
-  events.on('click', '.js-quickset', function (ev) {
-    var val = $(this).text()
-      , now = Date.now()
-      ;
-
-    ev.preventDefault();
-    ev.stopPropagation();
-
-    $.get('/controls/volume/' + val, function (data) {
-      console.log('Changed volume in ' + (Date.now() - now) + 'ms');
-      volume = data.volume;
-      $('.js-volume').val(data.volume);
-    });
-  });
-
-  events.on('click', '.js-refresh', function (ev) {
-    ev.preventDefault();
-    ev.stopPropagation();
-
-    getVolume();
-  });
-
-  // Initialize
-  function getVolume() {
-    $.get('/controls/volume', function (data) {
-      volume = data.volume;
-      $('.js-volume').val(data.volume);
-
-      if (data.muted) {
-        $('.js-mute').hide();
-        $('.js-unmute').show();
-      } else {
-        $('.js-unmute').hide();
-        $('.js-mute').show();
-      }
-    });
+var isSettingVolume = false;
+function setVolume (wantedVolume) {
+  if (isSettingVolume) {
+    return;
   }
-  getVolume();
-  setInterval(getVolume, 10 * 1000);
-});
+  console.log(wantedVolume);
+  var val = wantedVolume * 100;
+  isSettingVolume = true;
+  $.get('/controls/volume/' + val, function (data) {
+    volume = data.volume / 100;
+    isSettingVolume = false;
+    updateSlider();
+  });
+}
+var volume = 0.2;
+var setVolumeSlider;
+function touchmove (e) {
+  console.log(e.target, setVolumeSlider)
+  if (!e.target.contains(setVolumeSlider)) {
+    e.preventDefault();
+  }
+}
+function updateVolume () {
+  if (isSettingVolume) {
+    return;
+  }
+  $.get('/controls/volume', function (data) {
+    volume = data.volume / 100;
+    updateSlider();
+  });
+}
+function updateSlider () {
+  $('.js-real-volume').val(volume);
+}
+function init () {
+  window.scrollTo(0, 0);
+  $(window).on({
+    touchmove: touchmove,
+  });
+  setVolumeSlider = $('.js-set-volume').on('change', function () {
+    setVolume(this.value);
+  }).get(0);
+  updateVolume();
+  setInterval(updateVolume);
+}
+$(init);
