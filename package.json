@@ -27,7 +27,7 @@
     "remote"
   ],
   "author": "AJ ONeal <coolaj86@gmail.com> (http://coolaj86.com)",
-  "license": "Apache2",
+  "license": "Apache-2.0",
   "bugs": {
     "url": "https://github.com/coolaj86/osx-wifi-volume-remote/issues"
   }
