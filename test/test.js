@@ -1,10 +1,8 @@
 (function () {
-  'use strict';
+  "use strict";
 
-  var wivol = require('../lib/osascript-vol-ctrl')
-    , fade = wivol.fade
-    ;
-
+  var wivol = require("../lib/osascript-vol-ctrl"),
+    fade = wivol.fade;
   /*
   get(function (err, num) {
     console.log('Volume is at', num);
@@ -34,24 +32,30 @@
 
   // Decrements
   wivol.get(function (err, cur, muted) {
-    console.log('got vals', cur, muted);
-    wivol.fade(function (err, cur, muted) {
-      console.log('faded to 30', cur, muted);
-      wivol.mute(function (err, cur, muted) {
-        console.log('mute', cur, muted);
-        setTimeout(function () {
-
-          wivol.unmute(function (err, cur, muted) {
-            console.log('unmute', cur, muted);
-            wivol.fadeBy(function (err, cur, muted) {
-              console.log('faded by -5', cur, muted);
-            }, -5, 1000);
-          }, 600);
-
-        }, 1000);
-      }, 300);
-    }, 30, 3000);
+    console.log("got vals", cur, muted);
+    wivol.fade(
+      function (err, cur, muted) {
+        console.log("faded to 30", cur, muted);
+        wivol.mute(function (err, cur, muted) {
+          console.log("mute", cur, muted);
+          setTimeout(function () {
+            wivol.unmute(function (err, cur, muted) {
+              console.log("unmute", cur, muted);
+              wivol.fadeBy(
+                function (err, cur, muted) {
+                  console.log("faded by -5", cur, muted);
+                },
+                -5,
+                1000
+              );
+            }, 600);
+          }, 1000);
+        }, 300);
+      },
+      30,
+      3000
+    );
   });
 
   //wivol.mute();
-}());
+})();
