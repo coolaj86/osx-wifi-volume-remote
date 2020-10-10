@@ -1,13 +1,13 @@
 {
   "name": "osx-wifi-volume-remote",
-  "version": "1.0.2",
+  "version": "1.1.0",
   "description": "A web-based html5 / node.js app to control OS X system volume from iPhone, Android, etc",
   "main": "lib/osascript-vol-ctrl",
   "directories": {
     "test": "test"
   },
   "dependencies": {
-    "express": "^3.21.2"
+    "express": "^4.17.1"
   },
   "devDependencies": {},
   "bin": {
