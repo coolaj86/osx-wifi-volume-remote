@@ -76,7 +76,7 @@ node app 4040
 
 I had to learn a bit of AppleScript to get this all together.
 I'll give the gist of it below an you can also
-[read the article](http://blog.coolaj86.com/articles/how-to-control-os-x-system-volume-with-applescript/)
+[read the article](https://coolaj86.com/articles/how-to-control-os-x-system-volume-with-applescript/)
 on my blog.
 
 ```bash
